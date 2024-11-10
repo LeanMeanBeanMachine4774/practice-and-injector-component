@@ -5,7 +5,7 @@ from components.injector import InjectorComponent
 
 class MyRobot(magicbot.MagicRobot):
     injector: InjectorComponent
-    
+
     def createObjects(self) -> None:
         self.controller = wpilib.XboxController(0)
 
@@ -15,8 +15,6 @@ class MyRobot(magicbot.MagicRobot):
     def teleopPeriodic(self) -> None:
         if self.controller.getAButton():
             self.injector.intaking()
-            
-            
 
 
 if __name__ == "__main__":
