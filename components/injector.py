@@ -10,6 +10,8 @@ class InjectorComponent:
         self.breakbeam = DigitalInput(2)
 
     def intaking(self) -> None:
+        if not self.breakbeam.get():
+            self.desired_injector_speed = 0.0
         self.desired_injector_speed = 0.5
 
     def execute(self) -> None:
