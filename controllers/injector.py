@@ -1,17 +1,15 @@
 from magicbot import StateMachine, state
-from components.shooter import ShooterComponent
 from components.injector import InjectorComponent
 
 
 class Injector(StateMachine):
-    shooter: ShooterComponent
-    injector: InjectorComponent
+    injector_component: InjectorComponent
 
     def try_intake(self) -> None:
         self.engage()
 
     @state(first=True, must_finish=True)
     def intaking(self) -> None:
-        self.injector.intaking()
-        if self.injector.has_note():
+        self.injector_component.intaking()
+        if self.injector_component.has_note():
             self.done()

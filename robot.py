@@ -1,10 +1,12 @@
 import magicbot
 import wpilib
-from components.injector import InjectorComponent
+from controllers.injector import Injector
+from controllers.shooter import Shooter
 
 
 class MyRobot(magicbot.MagicRobot):
-    injector: InjectorComponent
+    injector: Injector
+    shooter: Shooter
 
     def createObjects(self) -> None:
         self.controller = wpilib.XboxController(0)
@@ -14,7 +16,9 @@ class MyRobot(magicbot.MagicRobot):
 
     def teleopPeriodic(self) -> None:
         if self.controller.getAButton():
-            self.injector.intaking()
+            self.injector.try_intake()
+        if self.controller.getRightBumper():
+            self.shooter.try_outtake()
 
 
 if __name__ == "__main__":
