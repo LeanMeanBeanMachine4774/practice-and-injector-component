@@ -1,4 +1,4 @@
-from phoenix6.controls import Follower, NeutralOut, DutyCycleOut
+from phoenix6.controls import Follower, NeutralOut, DutyCycleOut, VoltageOut
 from phoenix6.hardware import TalonFX
 from phoenix6.configs import MotorOutputConfigs
 from phoenix6.signals import NeutralModeValue
@@ -20,7 +20,7 @@ class ShooterComponent:
         self.left_flywheel.set_control(NeutralOut())
 
     def spin_up_flywheels(self) -> None:
-        self.desired_flywheel_speed = 0.5
+        self.desired_flywheel_speed = 6
 
     def coast_flywheels(self) -> None:
         self.desired_flywheel_speed = 0
@@ -29,4 +29,4 @@ class ShooterComponent:
         if self.desired_flywheel_speed == 0:
             self.left_flywheel.set_control(NeutralOut())
         else:
-            self.left_flywheel.set_control(DutyCycleOut(self.desired_flywheel_speed))
+            self.left_flywheel.set_control(VoltageOut(self.desired_flywheel_speed))
