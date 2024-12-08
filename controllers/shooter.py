@@ -17,7 +17,7 @@ class Shooter(StateMachine):
             self.shooter_component.spin_up_flywheels()
         else:
             self.shooter_component.coast_flywheels()
-        if self.outtake_desire:
+        if self.outtake_desire and self.injector_component.has_note:
             self.engage()
 
     @state(first=True, must_finish=True)
